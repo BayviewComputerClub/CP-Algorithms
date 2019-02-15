@@ -11,6 +11,7 @@ public class Dijkstra {
 	public static void main(String[] args) {
 		for (int i = 0; i < size; i++) {
 			adjList[i] = new ArrayList<Node>();
+			weights[i] = 2147483647;
 		}
 		// Get input and connect nodes
 		dijkstra(0); // Replace 0 with the starting node
