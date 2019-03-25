@@ -4,9 +4,8 @@ import java.util.*;
 
 // Shortest path algorithm
 public class Dijkstra {
-	private static int size = 5, weights[] = new int[size];
-	private static ArrayList<Node>[] adjList = new ArrayList[size];
-	private static Dijkstra instance = new Dijkstra(); // Required because Java is a stupid language
+	static int size = 5, weights[] = new int[size];
+	static ArrayList<Node>[] adjList = new ArrayList[size];
 
 	public static void main(String[] args) {
 		for (int i = 0; i < size; i++) {
@@ -19,25 +18,29 @@ public class Dijkstra {
 	}
 
 	private static void dijkstra(int nodeID) {
-		Queue<Node> q = new LinkedList<Node>();
-		Node curNode = instance.new Node(nodeID, 0); // Required because Java is a stupid language
+		PriorityQueue<Node> q = new PriorityQueue<Node>();
+		Node curNode = new Node(nodeID, 0);
 		q.offer(curNode); // Add node to queue
 		while (!q.isEmpty()) {
 			curNode = q.poll();
 			for (Node node : adjList[curNode.nodeID]) // Add child nodes to queue
 				if (node.weight + curNode.weight < weights[node.nodeID]) { // Check for child node having smaller weight
 					weights[node.nodeID] = node.weight + curNode.weight;
-					q.offer(instance.new Node(node.nodeID, weights[node.nodeID])); // Add child node
+					q.offer(new Node(node.nodeID, weights[node.nodeID])); // Add child node
 				}
 		}
 	}
 
-	private class Node {
+ 	static class Node implements Comparable<Node>{ // needs priority queue, so we need to implement a comparable to be able to sort the values
 		int weight, nodeID;
 
 		Node(int weight, int nodeID) {
 			this.nodeID = nodeID;
 			this.weight = weight;
 		}
+		public int compareTo(Node o){
+			Integer.compare(weight, o.weight);
+		}
+		
 	}
 }
