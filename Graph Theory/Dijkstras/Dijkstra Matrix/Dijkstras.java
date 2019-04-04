@@ -19,7 +19,7 @@ public class Dijkstras { //single shortest path
 			int min = Integer.MAX_VALUE;
 			int u = -1;
 			for(int j = 1; j <= n; j++){
-				if(!vis[j]&&dis[j]<min) {
+				if(!vis[j] && dis[j]<min) {
 					min = dis[j];
 					u = j;
 				}
@@ -27,7 +27,7 @@ public class Dijkstras { //single shortest path
 			if(u==-1)break;
 			vis[u]=true;
 			for(int j = 1; j <= n; j++)
-				if(adj[u][j] != nteger.MAX_VALUE && !vis[j]) dis[j] = Math.min(dis[j], dis[u]+adj[u][j]);
+				if(adj[u][j] != Integer.MAX_VALUE && !vis[j]) dis[j] = Math.min(dis[j], dis[u]+adj[u][j]);
 		}
 		for(int i = 1; i <= n; i++)
 			System.out.println(vis[i]? dis[i]:-1);
